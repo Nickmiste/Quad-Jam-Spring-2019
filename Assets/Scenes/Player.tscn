@@ -1,7 +1,9 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Player.gd" type="Script" id=1]
-[ext_resource path="res://4155692815.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Scripts/Player.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Graphics/Sprites/PlaceholderPlayer.png" type="Texture" id=2]
+
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "Idle"
