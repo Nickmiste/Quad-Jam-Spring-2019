@@ -3,9 +3,9 @@ extends KinematicBody
 enum {IDLE, RUN, JUMP, HURT, DEAD}
 var state = IDLE
 
+#Global Constants
 const GRAVITY = 0.5
-const SPEED_MAX = 5
-const SPEED_RUN = 25
+const SPEED_RUN = 10
 const JUMP_MAX = 1
 
 var move_speed = SPEED_RUN
@@ -36,6 +36,7 @@ func change_state(new_state):
 
 func _physics_process(delta):
 	velocity.y -= GRAVITY * delta
+	velocity.x = 0
 	
 	control_process()
 	
@@ -44,14 +45,14 @@ func _physics_process(delta):
 		jump_count = JUMP_MAX
 
 func control_process():
-	var right = Input.is_action_just_pressed("right")
-	var left = Input.is_action_just_pressed("left")
+	var right = Input.is_action_pressed("right")
+	var left = Input.is_action_pressed("left")
 	var jump = Input.is_action_just_pressed("jump")
 	
 	if right:
-		velocity.x += move_speed
+		velocity.x = move_speed
 	if left:
-		velocity.x -= move_speed
+		velocity.x = -move_speed
 	
 	if jump and jump_count > 0:
 		jump_count -= 1
@@ -61,7 +62,5 @@ func control_process():
 		change_state(RUN)
 	if velocity == Vector3(0,0,0):
 		change_state(IDLE)
-	
-	velocity.x = clamp(velocity.x, -5, SPEED_MAX)
 
 
